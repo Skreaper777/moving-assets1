@@ -11,18 +11,19 @@ with open("config.json", encoding="utf-8") as f:
     cfg = json.load(f)
 
 # 2) Извлекаем настройки
-WINDOW_WIDTH  = cfg["window_size"]["width"]
-WINDOW_HEIGHT = cfg["window_size"]["height"]
-BG_COLOR      = tuple(cfg["background_color"])
+WINDOW_WIDTH   = cfg["window_size"]["width"]
+WINDOW_HEIGHT  = cfg["window_size"]["height"]
+BG_COLOR       = tuple(cfg["background_color"])
 
 TILESET_PATH     = cfg["tileset_path"]
 ADAM_SPRITE_PATH = cfg["adam_sprite_path"]
 
-TILE_W, TILE_H     = cfg["tile_size"]["w"], cfg["tile_size"]["h"]
+TILE_W, TILE_H   = cfg["tile_size"]["w"], cfg["tile_size"]["h"]
 MAP_COLS, MAP_ROWS = cfg["map_size"]["cols"], cfg["map_size"]["rows"]
 
-tile_ids = cfg["tile_ids"]
-game_map = cfg["game_map"]
+# Вместо tile_ids теперь пиксельные координаты тайлов
+tile_defs = cfg["tile_defs"]
+game_map  = cfg["game_map"]
 
 # Параметры Адама
 FRAME_W, FRAME_H = 16, 32    # высота 32px
@@ -37,17 +38,15 @@ pygame.init()
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Комната и Адам")
 
-# 3) Нарезаем тайлсет комнаты
+# 3) Загружаем тайлсет и сразу вырезаем нужные тайлы по пикселям
 tileset = pygame.image.load(TILESET_PATH).convert_alpha()
-tiles = []
-cols = tileset.get_width() // TILE_W
-rows = tileset.get_height() // TILE_H
-for y in range(rows):
-    for x in range(cols):
-        rect = pygame.Rect(x*TILE_W, y*TILE_H, TILE_W, TILE_H)
-        tiles.append(tileset.subsurface(rect))
+tiles = {}
+for name, pos in tile_defs.items():
+    px, py = pos["px"], pos["py"]
+    rect = pygame.Rect(px, py, TILE_W, TILE_H)
+    tiles[name] = tileset.subsurface(rect)
 
-# 4) Нарезаем спрайт-лист Адама
+# 4) Нарезаем спрайт-лист Адама как раньше
 adam_sheet = pygame.image.load(ADAM_SPRITE_PATH).convert_alpha()
 def slice_adam(sheet):
     frames = [[] for _ in range(4)]
@@ -134,12 +133,13 @@ while running:
     # ---- отрисовка ----
     screen.fill(BG_COLOR)
 
-    # 1) рисуем тайлы комнаты
+    # 1) рисуем тайлы комнаты по ключам из game_map
     for r in range(MAP_ROWS):
         for c in range(MAP_COLS):
             key = game_map[r][c]
-            idx = tile_ids.get(key, tile_ids["floor"])
-            screen.blit(tiles[idx], (c*TILE_W, r*TILE_H))
+            img = tiles.get(key)
+            if img:
+                screen.blit(img, (c*TILE_W, r*TILE_H))
 
     # 2) рисуем Адама
     frame = adam_frames[current_dir][frame_index]
