@@ -1,7 +1,7 @@
 {
   "window_size": {
-    "width": 800,
-    "height": 600
+    "width": 1500,
+    "height": 1500
   },
   "background_color": [20, 20, 40],
   "tileset_path": "mnt/data/Modern_Interiors/Modern tiles_Free/Interiors_free/48x48/Room_Builder_free_48x48.png",
