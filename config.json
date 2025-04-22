@@ -1,0 +1,35 @@
+{
+  "window_size": {
+    "width": 800,
+    "height": 600
+  },
+  "background_color": [20, 20, 40],
+  "tileset_path": "mnt/data/Modern_Interiors/Modern tiles_Free/Interiors_free/48x48/Room_Builder_free_48x48.png",
+  "adam_sprite_path": "mnt/data/Modern_Interiors/Modern tiles_Free/Characters_free/Adam_run_16x16.png",
+
+  "tile_size": { "w": 48, "h": 48 },
+  "map_size":  { "cols": 12, "rows": 8 },
+
+  "tile_ids": {
+    "corner_tl":    0,
+    "edge_top":     1,
+    "corner_tr":    2,
+    "edge_left":   17,
+    "floor":       90,
+    "edge_right":  19,
+    "corner_bl":  204,
+    "edge_bottom":205,
+    "corner_br":  206
+  },
+
+  "game_map": [
+    ["corner_tl","edge_top","edge_top","edge_top","edge_top","edge_top","edge_top","edge_top","edge_top","edge_top","edge_top","corner_tr"],
+    ["edge_left","floor","floor","floor","floor","floor","floor","floor","floor","floor","floor","edge_right"],
+    ["edge_left","floor","floor","floor","floor","floor","floor","floor","floor","floor","floor","edge_right"],
+    ["edge_left","floor","floor","floor","floor","floor","floor","floor","floor","floor","floor","edge_right"],
+    ["edge_left","floor","floor","floor","floor","floor","floor","floor","floor","floor","floor","edge_right"],
+    ["edge_left","floor","floor","floor","floor","floor","floor","floor","floor","floor","floor","edge_right"],
+    ["edge_left","floor","floor","floor","floor","floor","floor","floor","floor","floor","floor","edge_right"],
+    ["corner_bl","edge_bottom","edge_bottom","edge_bottom","edge_bottom","floor","floor","edge_bottom","edge_bottom","edge_bottom","edge_bottom","corner_br"]
+  ]
+}
