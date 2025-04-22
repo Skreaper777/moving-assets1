@@ -14,7 +14,7 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Адам бегает по комнате")
 
 # Загрузка спрайт-листа
-sprite_sheet = pygame.image.load("mnt/data/Modern_Interiors/Modern tiles_Free/Characters_free/Adam_run_16x16.png").convert_alpha()
+sprite_sheet = pygame.image.load("mnt/data/Adam_run_16x16.png").convert_alpha()
 
 # Параметры кадров и масштаб
 FRAME_WIDTH, FRAME_HEIGHT = 16, 32
