@@ -7,7 +7,7 @@ import math
 import json
 
 # 1) Загружаем конфиг
-with open("config.json", encoding="utf-8") as f:
+with open("config-game-walls1.json", encoding="utf-8") as f:
     cfg = json.load(f)
 
 # 2) Извлекаем настройки
